@@ -1,18 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: httpd-ingress
   annotations:
    kubernetes.io/ingress.class: citrix
-  name: guestbook-ingress
+   ingress.citrix.com/frontend-ip: 192.168.33.15
 spec:
   rules:
-  - host: www.guestbook.com
+  - host: www.guestbook3.com
     http:
       paths:
       - backend:
           service:
-            name: frontend
+            name: http-service
             port:
-              number: 80
+              number: 8080
         path: /
         pathType: Prefix

@@ -86,7 +86,6 @@ spec:
       name: cic-k8s-ingress-controller
       labels:
         app: cic-k8s-ingress-controller
-      annotations:
     spec: 
       serviceAccountName: cic-k8s-role
       containers:
@@ -95,21 +94,15 @@ spec:
         env:
          # Set NetScaler NSIP/SNIP, SNIP in case of HA (mgmt has to be enabled) 
          - name: "NS_IP"
-           value: "10.106.166.116"
+           value: "192.168.33.15"
          # Set username for Nitro
          - name: "NS_USER"
-           valueFrom:
-            secretKeyRef:
-             name: nslogin
-             key: username
+           value: "nsroot"
          - name: "LOGLEVEL"
-           value: "INFO"
+           value: "DEBUG"
          # Set user password for Nitro
          - name: "NS_PASSWORD"
-           valueFrom:
-            secretKeyRef:
-             name: nslogin
-             key: password
+           value: "docker exec cpx_host cat /var/random_id"
          # Set log level
          - name: "EULA"
            value: "yes"
